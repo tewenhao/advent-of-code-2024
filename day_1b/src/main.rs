@@ -31,8 +31,6 @@ fn main() {
         let count = right_hashmap.entry(num).or_insert(0);
         *count += 1;
     }
-    
-    total = 0;
 
     for num in left_list {
         let count = right_hashmap.get(&num).copied().unwrap_or(0);
