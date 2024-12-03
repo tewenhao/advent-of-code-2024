@@ -1,6 +1,5 @@
 use std::fs;
 use std::str;
-use std::collections::HashMap;
 
 fn main() {
     let contents: String = fs::read_to_string("input.txt")
