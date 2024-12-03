@@ -25,8 +25,6 @@ fn main() {
         }
     }
 
-    // part 1
-
     left_list.sort();
     right_list.sort();
 
@@ -35,22 +33,5 @@ fn main() {
         total += val.abs();
     }
 
-    println!("Part 1: Total distance between the two lists is {total}");
-
-    // part 2
-    let mut right_hashmap: HashMap<i32, i32> = HashMap::new();
-
-    for num in right_list {
-        let count = right_hashmap.entry(num).or_insert(0);
-        *count += 1;
-    }
-    
-    total = 0;
-
-    for num in left_list {
-        let count = right_hashmap.get(&num).copied().unwrap_or(0);
-        total += num * count;
-    }
-
-    println!("Part 2: Final similarity score is {total}");
+    println!("Total distance between the two lists is {total}");
 }
