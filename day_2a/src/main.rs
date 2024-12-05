@@ -1,30 +1,23 @@
 use std::fs;
 use std::str;
 
-fn is_safe_asc(numbers: &[i32]) -> bool {
-    for i in 1..numbers.len() {
-        if numbers[i] - numbers[i - 1] < 1 || numbers[i] - numbers[i - 1] > 3 {
-            return false;
-        }
-    }
-
-    true
-}
-
-fn is_safe_desc(numbers: &[i32]) -> bool {
-    for i in 1..numbers.len() {
-        if numbers[i - 1] - numbers[i] < 1 || numbers[i - 1] - numbers[i] > 3 {
-            return false;
-        }
-    }
-
-    true
-}
-
 // for parameters, need to be specific with their types
 // this is how to pass an immutable slice as a parameter
 fn is_safe(numbers: &[i32]) -> bool {
-    is_safe_asc(numbers) || is_safe_desc(numbers)
+    let is_asc: bool = numbers[0] < numbers[1];
+    const MINDIFF: i32 = 1;
+    const MAXDIFF: i32 = 3;
+
+    for i in 1..numbers.len() {
+        let violate_diff: bool = (numbers[i - 1] - numbers[i]).abs() < MINDIFF || (numbers[i - 1] - numbers[i]).abs() > MAXDIFF;
+        let violate_dir: bool = (numbers[i - 1] < numbers[i]) != is_asc;
+
+        if violate_diff || violate_dir {
+            return false;
+        }
+    }
+
+    true
 }
 
 fn main() {
